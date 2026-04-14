@@ -1,0 +1,18 @@
+{
+  "editor.wordWrap": "on",
+  "editor.fontSize": 16,
+  "latex-workshop.latex.tools": [
+    {
+      "name": "build-sh",
+      "command": "bash",
+      "args": ["./build.sh", "%DOC%.tex"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "build-sh",
+      "tools": ["build-sh"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "lastUsed"
+}

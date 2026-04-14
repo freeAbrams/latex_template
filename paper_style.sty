@@ -1,0 +1,147 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{paper_style}[2026/04/15 A4 two-column Japanese proposal style]
+
+\RequirePackage[a4paper,left=15mm,right=15mm,top=24mm,bottom=18mm]{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{xeCJK}
+\RequirePackage{multicol}
+\RequirePackage[indentafter]{titlesec}
+\RequirePackage{indentfirst}
+\RequirePackage{array}
+\RequirePackage{caption}
+\RequirePackage{enumitem}
+\RequirePackage{ragged2e}
+\RequirePackage{makecell}
+\RequirePackage{graphicx}
+
+\newcommand{\PaperRootFonts}{../.fonts}
+
+\IfFileExists{\PaperRootFonts/times_new_roman/times_new_roman_regular.ttf}{%
+  \setmainfont{times_new_roman_regular.ttf}[
+    Path=\PaperRootFonts/times_new_roman/,
+    BoldFont=times_new_roman_bold.ttf,
+    ItalicFont=times_new_roman_italic.ttf,
+    BoldItalicFont=times_new_roman_bold_italic.ttf
+  ]
+}{%
+  \IfFontExistsTF{Times New Roman}{%
+    \setmainfont{Times New Roman}
+  }{%
+    \setmainfont{Liberation Serif}
+  }%
+}
+
+\setsansfont{Liberation Sans}
+
+\IfFileExists{\PaperRootFonts/ms_mincho/msmincho.ttc}{%
+  \IfFileExists{\PaperRootFonts/ms_mincho/msmincho_bold.ttc}{%
+    \setCJKmainfont{msmincho.ttc}[
+      Path=\PaperRootFonts/ms_mincho/,
+      BoldFont=msmincho_bold.ttc,
+      ItalicFont=msmincho.ttc,
+      BoldItalicFont=msmincho_bold.ttc
+    ]
+  }{%
+    \setCJKmainfont{msmincho.ttc}[
+      Path=\PaperRootFonts/ms_mincho/,
+      AutoFakeBold=2
+    ]
+  }%
+}{%
+  \IfFontExistsTF{MS Mincho}{%
+    \setCJKmainfont{MS Mincho}[
+      AutoFakeBold=2
+    ]
+  }{%
+    \setCJKmainfont{Noto Serif CJK JP}[
+      BoldFont={Noto Serif CJK JP},
+      ItalicFont={Noto Serif CJK JP},
+      BoldItalicFont={Noto Serif CJK JP}
+    ]
+  }%
+}
+
+
+\newlength{\PaperParIndent}
+\pagestyle{empty}
+\AtBeginDocument{\setlength{\parindent}{1em}}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{7.5mm}
+\setlength{\columnseprule}{0pt}
+\setlength{\tabcolsep}{4pt}
+\setlength{\arrayrulewidth}{0.5pt}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\extrarowheight}{0.1ex}
+
+\DeclareCaptionFont{papercaption}{\fontsize{9pt}{12pt}\selectfont}
+\DeclareCaptionLabelFormat{jpcaption}{#1#2}
+\captionsetup{
+  font=papercaption,
+  labelformat=jpcaption,
+  labelsep=space,
+  skip=4pt
+}
+\captionsetup[table]{name=表,justification=centering,singlelinecheck=false}
+\captionsetup[figure]{name=図,justification=centering,singlelinecheck=false}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\setcounter{secnumdepth}{2}
+
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{10pt}{12pt}\selectfont}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{0.8\baselineskip}{0.35\baselineskip}
+
+\titleformat{\subsection}
+  {\normalfont\bfseries\fontsize{9pt}{12.6pt}\selectfont}
+  {\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{0.55\baselineskip}{0.25\baselineskip}
+
+\newcommand{\PaperTitleText}{}
+\newcommand{\PaperAdvisorText}{}
+\newcommand{\PaperStudentText}{}
+\newcommand{\PaperTitle}[1]{\gdef\PaperTitleText{#1}}
+\newcommand{\PaperAdvisor}[1]{\gdef\PaperAdvisorText{#1}}
+\newcommand{\PaperStudent}[1]{\gdef\PaperStudentText{#1}}
+
+\newcommand{\MakePaperTitle}{%
+  \begin{center}
+    {\normalfont\fontsize{14pt}{20pt}\selectfont \PaperTitleText\par}
+  \end{center}
+  \vspace{0.8\baselineskip}
+  {\normalfont\fontsize{9pt}{12pt}\selectfont
+   \noindent \PaperAdvisorText\hfill\PaperStudentText\par}
+  \vspace{1.2\baselineskip}
+}
+
+\newenvironment{PaperBody}{%
+  \begin{multicols}{2}
+  \raggedcolumns
+  \fontsize{9pt}{12.6pt}\selectfont
+  \settowidth{\PaperParIndent}{あ}
+  \setlength{\parindent}{\PaperParIndent}
+  \setlength{\parskip}{0pt}
+}{%
+  \end{multicols}
+}
+
+\newcommand{\papercite}[1]{\textsuperscript{[#1]}}
+\newcommand{\TableCaption}[2]{\captionsetup{type=table}\captionof{table}{#1}\label{#2}}
+\newcommand{\FigureCaption}[2]{\captionsetup{type=figure}\captionof{figure}{#1}\label{#2}}
+\newcommand{\paperreferencesheading}{%
+  \par\begin{center}\fontsize{9pt}{12pt}\selectfont\bfseries 文　　献\end{center}\vspace{-0.3\baselineskip}
+}
+
+\newlist{paperrefs}{enumerate}{1}
+\setlist[paperrefs]{%
+  label={[}\arabic*{]},
+  leftmargin=2.2em,
+  itemsep=0.2em,
+  topsep=0.2em,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
