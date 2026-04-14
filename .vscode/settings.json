@@ -1,6 +1,9 @@
 {
   "editor.wordWrap": "on",
-  "editor.fontSize": 16,
+  "emmet.triggerExpansionOnTab": true,
+
+    "editor.fontSize": 18,
+    "window.zoomLevel": 1.2,
   "latex-workshop.latex.tools": [
     {
       "name": "build-sh",
