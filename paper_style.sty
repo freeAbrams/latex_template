@@ -86,7 +86,8 @@
 
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\setcounter{secnumdepth}{2}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\setcounter{secnumdepth}{3}
 
 \titleformat{\section}
   {\normalfont\bfseries\fontsize{10pt}{12pt}\selectfont}
@@ -97,6 +98,11 @@
   {\normalfont\bfseries\fontsize{9pt}{12.6pt}\selectfont}
   {\thesubsection}{0.6em}{}
 \titlespacing*{\subsection}{0pt}{0.55\baselineskip}{0.25\baselineskip}
+
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\fontsize{9pt}{12.6pt}\selectfont}
+  {\thesubsubsection}{0.6em}{}
+\titlespacing*{\subsubsection}{0pt}{0.55\baselineskip}{0.25\baselineskip}
 
 \newcommand{\PaperTitleText}{}
 \newcommand{\PaperAdvisorText}{}
@@ -116,14 +122,23 @@
 }
 
 \newenvironment{PaperBody}{%
-  \begin{multicols}{2}
+  \begin{multicols*}{2}
   \raggedcolumns
   \fontsize{9pt}{12.6pt}\selectfont
   \settowidth{\PaperParIndent}{あ}
   \setlength{\parindent}{\PaperParIndent}
   \setlength{\parskip}{0pt}
 }{%
-  \end{multicols}
+  \end{multicols*}
+}
+
+\newenvironment{BottomColumnBlock}{%
+  \par
+  \vspace*{\fill}
+  \noindent\begin{minipage}{\linewidth}
+}{%
+  \end{minipage}\par
+  \columnbreak
 }
 
 \newcommand{\papercite}[1]{\textsuperscript{[#1]}}

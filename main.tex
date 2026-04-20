@@ -23,10 +23,14 @@
 ここに研究目標を書く．
 
 \section{研究方法}\label{sec:method}
-図\ref{fig:method:sample-image}に画像挿入の例を示す．表\ref{tab:method:schedule}に表の例を示す．
+図\ref{fig:method:sample-image}に画像挿入の例を示す．
+表\ref{tab:method:schedule}に表の例を示す．
 
 \subsection{手法の概要}\label{sec:method:overview}
 ここに手法の流れ，使用データ，使用モデルを書く．
+
+\subsubsection{実装方針}\label{sec:method:overview:implementation}
+必要に応じて，\subsubsection を用いて実装方針や評価設計を段階的に整理する．
 
 \subsection{図の例}\label{sec:method:figure-example}
 \begin{center}
@@ -34,7 +38,7 @@
 \FigureCaption{画像挿入の例}{fig:method:sample-image}
 \end{center}
 
-\subsection{表の例}\label{sec:method:table-example}
+\begin{BottomColumnBlock}
 \begin{center}
 \TableCaption{研究スケジュールの例}{tab:method:schedule}
 {{\fontsize{9pt}{11pt}\selectfont
@@ -52,6 +56,11 @@
 \hline
 \end{tabular}}}
 \end{center}
+\end{BottomColumnBlock}
+
+\subsection{評価方針}\label{sec:method:evaluation}
+ここに評価方法や確認項目を書く．
+`BottomColumnBlock` の後ろに続く本文は，次の列の先頭から継続する．
 
 \paperreferencesheading
 \begin{paperrefs}
